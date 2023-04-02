@@ -2,8 +2,17 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MMExNotifier.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="MMExDatabasePath" Type="System.String" Scope="Application">
+    <Setting Name="MMExDatabasePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Users\Roberto\Dropbox\MoneyManagerEx\CasaGuidaNew.mmb</Value>
+    </Setting>
+    <Setting Name="DaysAhead" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="WindowPosition" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">100, 100</Value>
+    </Setting>
+    <Setting Name="WindowSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">800, 600</Value>
     </Setting>
   </Settings>
 </SettingsFile>
