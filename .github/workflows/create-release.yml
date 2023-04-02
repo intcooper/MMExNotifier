@@ -79,8 +79,12 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
+    - name: version
+      run: set MMExNotifierVersion="${{github.ref_name}}" & echo "${{github.ref_name}}"
+      id: version
+
     - name: Build the application
-      run: msbuild $env:Solution_Name /t:Build /p:Configuration=$env:Configuration
+      run: msbuild $env:Solution_Name /t:Build /p:VersionPrefix=$env:MMExNotifierVersion /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
    
@@ -88,10 +92,6 @@ jobs:
       uses: nadeemjazmawe/inno-setup-action-cli@v6.0.5
       with:
         filepath: MMExNotifier\Setup.iss
-
-    - name: version
-      run: set MMExNotifierVersion="${{github.ref_name}}" & echo "${{github.ref_name}}"
-      id: version
 
     - name: release
       uses: actions/create-release@v1
