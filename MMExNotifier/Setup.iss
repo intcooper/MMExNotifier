@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "MMExNotifier"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion GetEnv('MMExNotifierVersion')
 #define MyAppURL "https://github.com/intcooper/MMExNotifier"
 #define MyAppExeName "MMExNotifier.exe"
 

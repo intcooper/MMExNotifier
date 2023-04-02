@@ -85,12 +85,26 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
    
-
     - name: inno-setup-action-CLI
       uses: nadeemjazmawe/inno-setup-action-cli@v6.0.5
       with:
-        # Path for ISS file
         filepath: MMExNotifier\Setup.iss
+
+    - name: version
+        run: set MMExNotifierVersion="${{github.ref_name}}" & echo "${{github.ref_name}}"
+        id: version
+
+    - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ github.ref }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
     - name: upload windows artifact
         uses: actions/upload-release-asset@v1
@@ -98,6 +112,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: .\Setup\MMExNotifier_Setup_*.exe
-          asset_name: MMExNotifier_Setup_*.exe
+          asset_path: .\Setup\MMExNotifier_Setup_${{ steps.version.outputs.version }}.exe
+          asset_name: MMExNotifier_Setup_${{ steps.version.outputs.version }}.exe
           asset_content_type: application/exe
