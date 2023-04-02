@@ -6,6 +6,10 @@
 #define MyAppURL "https://github.com/intcooper/MMExNotifier"
 #define MyAppExeName "MMExNotifier.exe"
 
+#define FindFolder(Path) \
+    Local[0] = FindFirst(Path, faDirectory), \
+    Local[0] ? AddBackslash(ExtractFileDir(Path)) + FindGetFileName(Local[0]) : Path
+
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
@@ -23,6 +27,7 @@ LicenseFile=LICENSE.txt
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=commandline
 OutputBaseFilename={#MyAppName}_Setup
+OutputDir=Setup
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -37,24 +42,24 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "{app}\runtimes"
 
 [Files]
-Source: "bin\Release\net6.0-*\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\EntityFramework.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\EntityFramework.SqlServer.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\Hardcodet.NotifyIcon.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\linq2db.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\Microsoft.Toolkit.Uwp.Notifications.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\Microsoft.Win32.TaskScheduler.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\Microsoft.Windows.SDK.NET.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\MMExNotifier.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\MMExNotifier.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\MMExNotifier.dll.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\MMExNotifier.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\MMExNotifier.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\System.Data.SqlClient.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\System.Data.SQLite.EF6.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\WinRT.Runtime.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net6.0-*\runtimes\*"; DestDir: "{app}\runtimes"; Flags: recursesubdirs
+Source: "{#FindFolder("bin\Release\net6.0-*")}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\EntityFramework.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\EntityFramework.SqlServer.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\Hardcodet.NotifyIcon.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\linq2db.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\Microsoft.Toolkit.Uwp.Notifications.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\Microsoft.Win32.TaskScheduler.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\Microsoft.Windows.SDK.NET.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\MMExNotifier.deps.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\MMExNotifier.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\MMExNotifier.dll.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\MMExNotifier.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\MMExNotifier.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\System.Data.SqlClient.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\System.Data.SQLite.EF6.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\WinRT.Runtime.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#FindFolder("bin\Release\net6.0-*")}\runtimes\*"; DestDir: "{app}\runtimes"; Flags: recursesubdirs
 Source: "LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
