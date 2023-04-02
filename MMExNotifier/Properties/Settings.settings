@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="MMExDatabasePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\Roberto\Dropbox\MoneyManagerEx\CasaGuidaNew.mmb</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DaysAhead" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7</Value>

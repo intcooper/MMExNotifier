@@ -25,7 +25,7 @@ namespace MMExNotifier.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Roberto\\Dropbox\\MoneyManagerEx\\CasaGuidaNew.mmb")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string MMExDatabasePath {
             get {
                 return ((string)(this["MMExDatabasePath"]));

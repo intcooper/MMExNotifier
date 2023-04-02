@@ -15,6 +15,13 @@ namespace MMExNotifier
             base.OnStartup(e);
 
             var dbPath = MMExNotifier.Properties.Settings.Default.MMExDatabasePath;
+
+            if (string.IsNullOrEmpty(dbPath))
+            {
+                var mainWindow = new MainWindow();
+                return;
+            }
+
             var daysAhead = MMExNotifier.Properties.Settings.Default.DaysAhead;
             var expiringTransactions = DbHelper.LoadRecurringTransactions(dbPath, daysAhead);
 

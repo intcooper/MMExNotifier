@@ -10,6 +10,7 @@ using System.Security.Principal;
 using System.IO;
 using System.ComponentModel;
 using Drawing = System.Drawing;
+using System.Reflection;
 
 namespace MMExNotifier
 {
@@ -41,6 +42,12 @@ namespace MMExNotifier
             Width = Properties.Settings.Default.WindowSize.Width;
             Height = Properties.Settings.Default.WindowSize.Height;
 
+            if (string.IsNullOrEmpty(MMExDatabasePath))
+            {
+                settingsPanel.Visibility = Visibility.Visible;
+                OpenFile_Click(this, new RoutedEventArgs());
+            }
+
             LoadRecurringTransactions();
         }
 
@@ -53,8 +60,13 @@ namespace MMExNotifier
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
-            const string aboutMessage = "MMExNotifier\n" +
-                "Version 0.1\n\n" +
+            var appVersion = Assembly
+                            .GetEntryAssembly()
+                            ?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                            ?.InformationalVersion ?? "unknown";
+
+            string aboutMessage = "MMExNotifier\n" +
+                $"Version {appVersion}\n\n" +
                 "This software is provided free of charge and may be used, copied, and distributed without restriction.";
 
             MessageBox.Show(this, aboutMessage, "About MMExNotifier", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -136,7 +148,7 @@ namespace MMExNotifier
         {
             var openFileDialog = new OpenFileDialog
             {
-                Title = "Select a file",
+                Title = "Select a MoneyManagerEx database file",
                 Filter = "MMEx Database (*.mmb)|*.mmb",
                 InitialDirectory = Path.GetDirectoryName(MMExDatabasePath)
             };
