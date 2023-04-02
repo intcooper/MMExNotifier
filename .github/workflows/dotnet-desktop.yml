@@ -50,7 +50,7 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Release]
+        configuration: [Debug, Release]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -89,10 +89,4 @@ jobs:
       run: msbuild $env:Solution_Name /t:Build /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
-   
 
-    - name: inno-setup-action-CLI
-      uses: nadeemjazmawe/inno-setup-action-cli@v6.0.5
-      with:
-        # Path for ISS file
-        filepath: MMExNotifier\Setup.iss
