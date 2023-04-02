@@ -1,9 +1,5 @@
 ﻿using LinqToDB.Mapping;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MMExNotifier.Entities
 {
@@ -19,15 +15,15 @@ namespace MMExNotifier.Entities
         [Column]
         public int PAYEEID { get; set; }
         [Column]
-        public string TRANSCODE { get; set; }/* Withdrawal, Deposit, Transfer */
+        public string? TRANSCODE { get; set; }/* Withdrawal, Deposit, Transfer */
         [Column]
         public double TRANSAMOUNT { get; set; }
         [Column]
-        public string STATUS { get; set; } /* None, Reconciled, Void, Follow up, Duplicate */
+        public string? STATUS { get; set; } /* None, Reconciled, Void, Follow up, Duplicate */
         [Column]
-        public string TRANSACTIONNUMBER { get; set; }
+        public string? TRANSACTIONNUMBER { get; set; }
         [Column]
-        public string NOTES { get; set; }
+        public string? NOTES { get; set; }
         [Column]
         public int CATEGID { get; set; }
         [Column]

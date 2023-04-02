@@ -1,11 +1,7 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using Windows.Foundation.Collections;
 
 namespace MMExNotifier
 {
@@ -14,20 +10,40 @@ namespace MMExNotifier
     /// </summary>
     public partial class App : Application
     {
-//        ToastNotificationManagerCompat.
-//            . OnActivated += toastArgs =>
-//{
-//    // Obtain the arguments from the notification
-//    ToastArguments args = ToastArguments.Parse(toastArgs.Argument);
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
 
-//        // Obtain any user input (text boxes, menu selections) from the notification
-//        ValueSet userInput = toastArgs.UserInput;
+            var dbPath = MMExNotifier.Properties.Settings.Default.MMExDatabasePath;
+            var daysAhead = MMExNotifier.Properties.Settings.Default.DaysAhead;
+            var expiringTransactions = DbHelper.LoadRecurringTransactions(dbPath, daysAhead);
 
-//        // Need to dispatch to UI thread if performing UI operations
-//        Application.Current.Dispatcher.Invoke(delegate
-//    {
-        
-//    });
-//};
+            if ((expiringTransactions != null) && (!expiringTransactions.Any()))
+            {
+                App.Current.Shutdown(0);
+            }
+            else
+            {
+                new ToastContentBuilder()
+                    .AddArgument("action", "viewTransactions")
+                    .AddArgument("conversationId", 9813)
+                    .AddText($"MMExNotifier", AdaptiveTextStyle.Header)
+                    .AddText($"One ore more recurring transaction are about to expire.")
+                    .SetToastScenario(ToastScenario.Reminder)
+                    .Show();
+
+                // Listen to notification activation
+                ToastNotificationManagerCompat.OnActivated += toastArgs =>
+                {
+                    ToastArguments args = ToastArguments.Parse(toastArgs.Argument);
+                    ValueSet userInput = toastArgs.UserInput;
+                    Application.Current.Dispatcher.Invoke(delegate
+                    {
+                        var mainWindow = new MainWindow();
+                        mainWindow.ShowDialog();
+                    });
+                };
+            }
+        }
     }
 }

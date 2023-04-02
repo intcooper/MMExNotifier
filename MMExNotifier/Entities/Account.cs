@@ -1,9 +1,5 @@
 ﻿using LinqToDB.Mapping;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MMExNotifier.Entities
 {
@@ -13,27 +9,27 @@ namespace MMExNotifier.Entities
         [PrimaryKey]
         public int ACCOUNTID { get; set; }
         [Column]
-        public string ACCOUNTNAME { get; set; }
+        public string? ACCOUNTNAME { get; set; }
         [Column]
-        public string ACCOUNTTYPE { get; set; }
+        public string? ACCOUNTTYPE { get; set; }
         [Column]
-        public string ACCOUNTNUM { get; set; }
+        public string? ACCOUNTNUM { get; set; }
         [Column]
-        public string STATUS { get; set; }
+        public string? STATUS { get; set; }
         [Column]
-        public string NOTES { get; set; }
+        public string? NOTES { get; set; }
         [Column]
-        public string HELDAT { get; set; }
+        public string? HELDAT { get; set; }
         [Column]
-        public string WEBSITE { get; set; }
+        public string? WEBSITE { get; set; }
         [Column]
-        public string CONTACTINFO { get; set; }
+        public string? CONTACTINFO { get; set; }
         [Column]
-        public string ACCESSINFO { get; set; }
+        public string? ACCESSINFO { get; set; }
         [Column]
         public double INITIALBAL { get; set; }
         [Column]
-        public string FAVORITEACCT { get; set; }
+        public string? FAVORITEACCT { get; set; }
         [Column]
         public int CURRENCYID { get; set; }
         [Column]

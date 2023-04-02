@@ -1,15 +1,12 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
-using MMExNotifier.Entities;
+﻿using MMExNotifier.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Win32.TaskScheduler;
-using LinqToDB;
-using System.Security.Principal;
 using Microsoft.Win32;
+using Microsoft.Win32.TaskScheduler;
+using System.Security.Principal;
 using System.IO;
 using System.ComponentModel;
 using Drawing = System.Drawing;
@@ -47,74 +44,6 @@ namespace MMExNotifier
             LoadRecurringTransactions();
         }
 
-        private void LoadRecurringTransactions()
-        {
-            try
-            {
-                var db = new LinqToDB.Data.DataConnection(
-                    ProviderName.SQLite,
-                    $"Data Source={MMExDatabasePath}");
-
-                var billDeposits = db.GetTable<BillDeposit>();
-                var categories = db.GetTable<Category>();
-                var payees = db.GetTable<Payee>();
-                var transactions = db.GetTable<Transaction>();
-                var accounts = db.GetTable<Account>();
-
-                ExpiringBills = (from b in billDeposits
-                                 from s in categories.Where(s => s.CATEGID == b.CATEGID).DefaultIfEmpty()
-                                 from c in categories.Where(c => c.CATEGID == s.PARENTID).DefaultIfEmpty()
-                                 from p in payees.Where(p => p.PAYEEID == b.PAYEEID).DefaultIfEmpty()
-                                 where b.NEXTOCCURRENCEDATE < DateTime.Now.AddDays(DaysAhead)
-                                 orderby b.NEXTOCCURRENCEDATE
-                                 select new ExpiringBill
-                                 {
-                                     BillId = b.BDID,
-                                     NextOccurrenceDate = b.NEXTOCCURRENCEDATE!.Value,
-                                     PayeeName = p.PAYEENAME!,
-                                     CategoryName = c.CATEGNAME!,
-                                     SubCategoryName = s.CATEGNAME!,
-                                     Notes = b.NOTES!
-                                 }).ToList();
-
-                if (!ExpiringBills.Any())
-                {
-                    Close();
-                }
-
-                foreach (var b in ExpiringBills)
-                {
-                    b.DaysToNextOccurrence = (int)b.NextOccurrenceDate.Subtract(DateTime.Today).TotalDays;
-
-                    new ToastContentBuilder()
-                        .AddArgument("action", "viewConversation")
-                        .AddArgument("conversationId", 9813 + b.BillId)
-                        .AddText("Expiring recurring transaction", AdaptiveTextStyle.Header)
-                        .AddText($"{b.NextOccurrenceDate.ToString("D")} - {b.PayeeName}")
-                        .AddText($"{b.CategoryName}{(b.SubCategoryName != null ? ":" : string.Empty)}{b.SubCategoryName}\n{b.Notes}")
-                        .SetToastScenario(ToastScenario.Reminder)
-                        .Show();
-                }
-
-                var openCreditCardAccounts = accounts.Where(a => a.ACCOUNTTYPE == "Credit Card" && a.STATUS != "Closed");
-
-                var ExpiringCreditTransactions = from ac in openCreditCardAccounts
-                                                 from tr in transactions.Where(t => t.ACCOUNTID == ac.ACCOUNTID
-                                                                                 && t.STATUS != "R"
-                                                                                 && t.TRANSDATE > DateTime.Today.AddDays(-45))
-                                                 select tr;
-            }
-            catch (Exception)
-            {
-                ExpiringBills = null;
-                MessageBox.Show("An error has occurred while loading the recurring transactions.\nMake sure that the database version matches the supported version.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            finally
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ExpiringBills)));
-            }
-        }
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -124,11 +53,11 @@ namespace MMExNotifier
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(@"MMExNotifier
-Version 0.1
+            const string aboutMessage = "MMExNotifier\n" +
+                "Version 0.1\n\n" +
+                "This software is provided free of charge and may be used, copied, and distributed without restriction.";
 
-This software is provided free of charge and may be used, copied, and distributed without restriction.",
-                "About MMExNotifier", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(this, aboutMessage, "About MMExNotifier", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -149,6 +78,23 @@ This software is provided free of charge and may be used, copied, and distribute
             Properties.Settings.Default.Save();
 
             LoadRecurringTransactions();
+        }
+
+        private void LoadRecurringTransactions()
+        {
+            try
+            {
+                ExpiringBills = DbHelper.LoadRecurringTransactions(MMExDatabasePath, DaysAhead);
+            }
+            catch (Exception)
+            {
+                ExpiringBills = null;
+                MessageBox.Show("An error has occurred while loading the recurring transactions.\nMake sure that the database version matches the supported version.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            finally
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ExpiringBills)));
+            }
         }
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
