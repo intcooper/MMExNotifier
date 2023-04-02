@@ -85,6 +85,12 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
+    - name: Build the application
+      run: msbuild $env:Solution_Name /t:Build /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+   
+
     - name: inno-setup-action-CLI
       uses: nadeemjazmawe/inno-setup-action-cli@v6.0.5
       with:
