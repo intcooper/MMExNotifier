@@ -18,7 +18,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=MMExNotifier\LICENSE.txt
+LicenseFile=LICENSE.txt
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=commandline
@@ -37,25 +37,25 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "{app}\runtimes"
 
 [Files]
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\EntityFramework.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\EntityFramework.SqlServer.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\Hardcodet.NotifyIcon.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\linq2db.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\Microsoft.Toolkit.Uwp.Notifications.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\Microsoft.Win32.TaskScheduler.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\Microsoft.Windows.SDK.NET.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.dll.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\System.Data.SqlClient.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\System.Data.SQLite.EF6.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\WinRT.Runtime.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "MMExNotifier\bin\Release\net6.0-windows10.0.22000.0\runtimes\*"; DestDir: "{app}\runtimes"; Flags: recursesubdirs
-Source: "MMExNotifier\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\EntityFramework.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\EntityFramework.SqlServer.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\Hardcodet.NotifyIcon.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\linq2db.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\Microsoft.Toolkit.Uwp.Notifications.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\Microsoft.Win32.TaskScheduler.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\Microsoft.Windows.SDK.NET.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.deps.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.dll.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\MMExNotifier.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\System.Data.SqlClient.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\System.Data.SQLite.EF6.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\WinRT.Runtime.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\net6.0-windows10.0.22000.0\runtimes\*"; DestDir: "{app}\runtimes"; Flags: recursesubdirs
+Source: "LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
