@@ -56,7 +56,6 @@ jobs:
 
     env:
       Solution_Name: MMExNotifier.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
 
     steps:
     - name: Checkout
@@ -85,7 +84,6 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
    
-
     - name: inno-setup-action-CLI
       uses: nadeemjazmawe/inno-setup-action-cli@v6.0.5
       with:
@@ -93,11 +91,11 @@ jobs:
         filepath: MMExNotifier\Setup.iss
 
     - name: upload windows artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: .\Setup\MMExNotifier_Setup_*.exe
-          asset_name: MMExNotifier_Setup_*.exe
-          asset_content_type: application/exe
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: .\Setup\MMExNotifier_Setup_*.exe
+        asset_name: MMExNotifier_Setup_*.exe
+        asset_content_type: application/exe
