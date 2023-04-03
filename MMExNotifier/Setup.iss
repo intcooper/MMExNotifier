@@ -9,7 +9,7 @@
 #define MyAppName "MMExNotifier"
 #define MyAppURL "https://github.com/intcooper/MMExNotifier"
 #define MyAppExeName "MMExNotifier.exe"
-#define PathToExe "bin\" + MyAppExeName)
+#define PathToExe "bin\" + MyAppExeName
 #define MyAppVersion RemoveFileExt(GetVersionNumbersString(PathToExe))
 
 [Setup]
