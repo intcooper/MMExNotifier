@@ -31,7 +31,7 @@ namespace MMExNotifier
                         select new ExpiringBill
                         {
                             BillId = b.BDID,
-                            NextOccurrenceDate = b.NEXTOCCURRENCEDATE!.Value,
+                            NextOccurrenceDate = b.NEXTOCCURRENCEDATE.Value,
                             PayeeName = p.PAYEENAME!,
                             CategoryName = c.CATEGNAME!,
                             SubCategoryName = s.CATEGNAME!,

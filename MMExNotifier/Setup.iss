@@ -9,7 +9,8 @@
 #define MyAppName "MMExNotifier"
 #define MyAppURL "https://github.com/intcooper/MMExNotifier"
 #define MyAppExeName "MMExNotifier.exe"
-#define MyAppVersion GetFileVersion("{#FindFolder("bin\Release\net6.0-*")}\{#MyAppExeName}")
+#define PathToExe "bin\" + MyAppExeName)
+#define MyAppVersion RemoveFileExt(GetVersionNumbersString(PathToExe))
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -17,7 +18,7 @@
 AppId={{8065688C-C1EA-4273-942D-DA80826524AA}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
+AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}

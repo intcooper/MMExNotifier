@@ -40,4 +40,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy $(TargetDir)$(TargetName).exe $(ProjectDir)\bin /Y" />
+  </Target>
+
 </Project>
