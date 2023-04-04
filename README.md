@@ -1,3 +1,5 @@
+[![Build](https://github.com/intcooper/MMExNotifier/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/intcooper/MMExNotifier/actions/workflows/dotnet-desktop.yml)
+
 # MMExNotifier
 
 This Windows desktop application shows the upcoming occurrences of the recurring transactions defined in a [MoneyManagerEx](https://github.com/moneymanagerex/moneymanagerex) database.
