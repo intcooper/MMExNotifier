@@ -15,7 +15,7 @@ MMExNotifier makes use of the following libraries:
 
 ## Compatibility
 
-MMExNotifier has been tested on Windows 10.
+MMExNotifier has been tested on Windows 10 and Windows 11.
 
 ## Known Issues
 
