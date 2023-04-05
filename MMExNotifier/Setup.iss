@@ -28,7 +28,7 @@ LicenseFile=LICENSE.txt
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=commandline
-OutputBaseFilename={#MyAppName}_Setup_{#MyAppVersion}
+OutputBaseFilename={#MyAppName}_Setup_v{#MyAppVersion}
 OutputDir=Setup
 Compression=lzma
 SolidCompression=yes
