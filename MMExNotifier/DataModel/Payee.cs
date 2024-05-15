@@ -1,8 +1,8 @@
 ﻿using LinqToDB.Mapping;
 
-namespace MMExNotifier.Entities
+namespace MMExNotifier.DataModel
 {
-    [Table(Name="PAYEE_V1")]
+    [Table(Name = "PAYEE_V1")]
     internal class Payee
     {
         [PrimaryKey]

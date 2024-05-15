@@ -1,7 +1,7 @@
 ﻿using LinqToDB.Mapping;
 using System;
 
-namespace MMExNotifier.Entities
+namespace MMExNotifier.DataModel
 {
     [Table(Name = "ACCOUNTLIST_V1")]
     internal class Account

@@ -1,11 +1,11 @@
 ﻿using LinqToDB.Data;
 
-namespace MMExNotifier
+namespace MMExNotifier.Database
 {
     internal class Connection : DataConnection
     {
         public Connection()
-            :base()
+            : base()
         {
 
         }

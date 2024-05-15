@@ -1,8 +1,8 @@
 ﻿using LinqToDB.Mapping;
 
-namespace MMExNotifier.Entities
+namespace MMExNotifier.DataModel
 {
-    [Table(Name="CATEGORY_V1")]
+    [Table(Name = "CATEGORY_V1")]
     internal class Category
     {
         [PrimaryKey]

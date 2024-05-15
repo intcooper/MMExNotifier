@@ -1,5 +1,4 @@
-﻿using MMExNotifier.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -11,47 +10,24 @@ using System.IO;
 using System.ComponentModel;
 using Drawing = System.Drawing;
 using System.Reflection;
+using MMExNotifier.DataModel;
 
 namespace MMExNotifier
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
-        public List<ExpiringBill>? ExpiringBills { get; set; }
-
-        public string MMExDatabasePath { get; set; }
-        public int DaysAhead { get; set; }
-
-        public bool RunAtLogon { get; set; }
-
-
         public MainWindow()
         {
-            DaysAhead = Properties.Settings.Default.DaysAhead;
-            MMExDatabasePath = Properties.Settings.Default.MMExDatabasePath;
-            using TaskService taskService = new();
-            RunAtLogon = taskService.RootFolder.Tasks.Any(t => t.Name == "MMExNotifier");
-
             InitializeComponent();
-            DataContext = this;
 
             Left = Properties.Settings.Default.WindowPosition.X;
             Top = Properties.Settings.Default.WindowPosition.Y;
             Width = Properties.Settings.Default.WindowSize.Width;
             Height = Properties.Settings.Default.WindowSize.Height;
-
-            if (string.IsNullOrEmpty(MMExDatabasePath))
-            {
-                settingsPanel.Visibility = Visibility.Visible;
-                OpenFile_Click(this, new RoutedEventArgs());
-            }
-
-            LoadRecurringTransactions();
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
@@ -84,30 +60,9 @@ namespace MMExNotifier
         private void SettingsPanelClose_Click(object sender, RoutedEventArgs e)
         {
             settingsPanel.Visibility = Visibility.Collapsed;
-
-            Properties.Settings.Default.DaysAhead = DaysAhead;
-            Properties.Settings.Default.MMExDatabasePath = MMExDatabasePath;
-            Properties.Settings.Default.Save();
-
-            LoadRecurringTransactions();
         }
 
-        private void LoadRecurringTransactions()
-        {
-            try
-            {
-                ExpiringBills = DbHelper.LoadRecurringTransactions(MMExDatabasePath, DaysAhead);
-            }
-            catch (Exception)
-            {
-                ExpiringBills = null;
-                MessageBox.Show("An error has occurred while loading the recurring transactions.\nMake sure that the database version matches the supported version.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            finally
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ExpiringBills)));
-            }
-        }
+
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -150,13 +105,12 @@ namespace MMExNotifier
             {
                 Title = "Select a MoneyManagerEx database file",
                 Filter = "MMEx Database (*.mmb)|*.mmb",
-                InitialDirectory = Path.GetDirectoryName(MMExDatabasePath)
+                InitialDirectory = Path.GetDirectoryName(DbPathTextbox.Text)
             };
 
             if (openFileDialog.ShowDialog() == true)
             {
-                MMExDatabasePath = openFileDialog.FileName;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MMExDatabasePath)));
+                DbPathTextbox.Text = openFileDialog.FileName;
             }
         }
     }

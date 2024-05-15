@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MMExNotifier"
+        xmlns:mvvm="clr-namespace:MMExNotifier.MVVM"
         mc:Ignorable="d"
         WindowStartupLocation="Manual"
         Visibility="Visible"
@@ -14,7 +15,7 @@
         WindowStyle="None">
     <Window.Resources>
         <ResourceDictionary>
-            <local:IsLessThanConverter x:Key="isLessThanConverter" />
+            <mvvm:IsLessThanConverter x:Key="isLessThanConverter" />
 
             <Style x:Key="titleButtonStyle" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="Transparent"/>
@@ -156,6 +157,17 @@
         </ListView>
 
         <Border x:Name="settingsPanel" Background="#DD666666" Grid.ColumnSpan="2" Visibility="Collapsed" >
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=AppSettings.MMExDatabasePath}" Value="">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
             <Grid Background="White" Margin="40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -168,7 +180,7 @@
                     <Border Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
                         <Grid>
                             <Label Content="Application Settings" />
-                            <Button x:Name="settingsPanelClose" Width="20" HorizontalAlignment="Right" Click="SettingsPanelClose_Click"
+                            <Button x:Name="settingsPanelClose" Width="20" HorizontalAlignment="Right" Click="SettingsPanelClose_Click" Command="{Binding SaveSettings}"
                                     Style="{StaticResource closeButtonStyle}">
                                 <Button.Content>
                                     <Path Data="M0,0 L10,10 M0,10 L10,0" Stroke="Black" StrokeThickness="1" />
@@ -177,7 +189,7 @@
                         </Grid>
                     </Border>
 
-                    <CheckBox Content="Run MMExNotifier on Windows logon" IsChecked="{Binding Path=RunAtLogon}"  Margin="20" Checked="RunOnLogon_Checked" Unchecked="RunOnLogon_Unchecked" />
+                    <CheckBox Content="Run MMExNotifier on Windows logon" IsChecked="{Binding Path=AppSettings.RunAtLogon}"  Margin="20" Checked="RunOnLogon_Checked" Unchecked="RunOnLogon_Unchecked" />
 
                     <Grid Margin="20,10">
                         <Grid.ColumnDefinitions>
@@ -188,7 +200,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Content="MMEx Database Path" />
-                        <TextBox Text="{Binding Path=MMExDatabasePath}" VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
+                        <TextBox x:Name="DbPathTextbox" Text="{Binding Path=AppSettings.MMExDatabasePath, Mode=TwoWay}" VerticalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
                         <Button Content="..." Grid.Column="3" Padding="10,0" Margin="5,0,0,0" Click="OpenFile_Click" />
 
                     </Grid>
@@ -201,7 +213,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Content="Notify for transactions" />
-                        <TextBox Text="{Binding Path=DaysAhead}" Grid.Column="1" Width="30" VerticalContentAlignment="Center" />
+                        <TextBox Text="{Binding Path=AppSettings.DaysAhead}" Grid.Column="1" Width="30" VerticalContentAlignment="Center" />
                         <Label Content="days ahead" Grid.Column="2" />
                     </Grid>
 

@@ -1,10 +1,10 @@
 ﻿using LinqToDB;
-using MMExNotifier.Entities;
+using MMExNotifier.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MMExNotifier
+namespace MMExNotifier.Database
 {
     internal static class DbHelper
     {

@@ -1,4 +1,8 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
+using MMExNotifier.Database;
+using MMExNotifier.DataModel;
+using MMExNotifier.Helpers;
+using MMExNotifier.ViewModels;
 using System.Linq;
 using System.Windows;
 using Windows.Foundation.Collections;
@@ -14,43 +18,12 @@ namespace MMExNotifier
         {
             base.OnStartup(e);
 
-            var dbPath = MMExNotifier.Properties.Settings.Default.MMExDatabasePath;
+            var view = new MainWindow();
+            var viewModel = new MainViewModel(new AppConfiguration(), new NotificationService());
 
-            if (string.IsNullOrEmpty(dbPath))
-            {
-                var mainWindow = new MainWindow();
-                return;
-            }
-
-            var daysAhead = MMExNotifier.Properties.Settings.Default.DaysAhead;
-            var expiringTransactions = DbHelper.LoadRecurringTransactions(dbPath, daysAhead);
-
-            if ((expiringTransactions != null) && (!expiringTransactions.Any()))
-            {
-                App.Current.Shutdown(0);
-            }
-            else
-            {
-                new ToastContentBuilder()
-                    .AddArgument("action", "viewTransactions")
-                    .AddArgument("conversationId", 9813)
-                    .AddText($"MMExNotifier", AdaptiveTextStyle.Header)
-                    .AddText($"One ore more recurring transaction are about to expire.")
-                    .SetToastScenario(ToastScenario.Reminder)
-                    .Show();
-
-                // Listen to notification activation
-                ToastNotificationManagerCompat.OnActivated += toastArgs =>
-                {
-                    ToastArguments args = ToastArguments.Parse(toastArgs.Argument);
-                    ValueSet userInput = toastArgs.UserInput;
-                    Application.Current.Dispatcher.Invoke(delegate
-                    {
-                        var mainWindow = new MainWindow();
-                        mainWindow.ShowDialog();
-                    });
-                };
-            }
+            view.DataContext = viewModel;
+            viewModel.OnClose += (s, e) => view.Close();
+            viewModel.OnOpen += (s, e) => view.ShowDialog();
         }
     }
 }

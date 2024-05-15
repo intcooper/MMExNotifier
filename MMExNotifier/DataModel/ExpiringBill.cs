@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MMExNotifier.Entities
+namespace MMExNotifier.DataModel
 {
     public class ExpiringBill
     {
