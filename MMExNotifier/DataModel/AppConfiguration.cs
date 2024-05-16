@@ -44,6 +44,10 @@ namespace MMExNotifier.DataModel
         private static void EnableSchedulerTask()
         {
             using TaskService taskService = new();
+            
+            if (taskService.RootFolder.Tasks.Any(t => t.Name == "MMExNotifier"))
+                return;
+
             TaskDefinition taskDefinition = taskService.NewTask();
 
             // Set the task settings

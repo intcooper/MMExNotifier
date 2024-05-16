@@ -1,11 +1,10 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
-using MMExNotifier.Database;
+﻿using MMExNotifier.Database;
 using MMExNotifier.DataModel;
 using MMExNotifier.Helpers;
 using MMExNotifier.ViewModels;
-using System.Linq;
+using System;
+using System.Threading;
 using System.Windows;
-using Windows.Foundation.Collections;
 
 namespace MMExNotifier
 {
@@ -18,12 +17,14 @@ namespace MMExNotifier
         {
             base.OnStartup(e);
 
+            var appConfiguration = new AppConfiguration();
+
             var view = new MainWindow();
-            var viewModel = new MainViewModel(new AppConfiguration(), new NotificationService());
+            var viewModel = new MainViewModel(appConfiguration, new NotificationService(), new DatabaseService(appConfiguration));
 
             view.DataContext = viewModel;
-            viewModel.OnClose += (s, e) => view.Close();
-            viewModel.OnOpen += (s, e) => view.ShowDialog();
+            viewModel.OnClose += (s, e) => Application.Current.Dispatcher.Invoke(() => view.Close());
+            viewModel.OnOpen += (s, e) => Application.Current.Dispatcher.Invoke(() => { if (view.Visibility != Visibility.Visible) view.ShowDialog(); });
         }
     }
 }
