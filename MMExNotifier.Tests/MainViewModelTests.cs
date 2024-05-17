@@ -4,7 +4,6 @@ using MMExNotifier.DataModel;
 using MMExNotifier.Helpers;
 using MMExNotifier.ViewModels;
 using Moq;
-using Windows.Media.ClosedCaptioning;
 
 namespace MMExNotifier.Tests
 {
@@ -121,6 +120,5 @@ namespace MMExNotifier.Tests
 
             mockNotificationService.Verify();
         }
-
     }
 }

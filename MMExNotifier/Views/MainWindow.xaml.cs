@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 using Microsoft.Win32.TaskScheduler;
 using System.Security.Principal;
 using System.IO;
-using System.ComponentModel;
 using Drawing = System.Drawing;
 using System.Reflection;
-using MMExNotifier.DataModel;
 
 namespace MMExNotifier
 {

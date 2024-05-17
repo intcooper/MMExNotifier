@@ -2,8 +2,6 @@
 using MMExNotifier.DataModel;
 using MMExNotifier.Helpers;
 using MMExNotifier.ViewModels;
-using System;
-using System.Threading;
 using System.Windows;
 
 namespace MMExNotifier
