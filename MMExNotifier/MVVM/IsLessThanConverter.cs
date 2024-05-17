@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace MMExNotifier
+namespace MMExNotifier.MVVM
 {
     internal class IsLessThanConverter : IValueConverter
     {

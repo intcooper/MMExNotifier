@@ -1,21 +1,21 @@
 ﻿using LinqToDB.Mapping;
 using System;
 
-namespace MMExNotifier.Entities
+namespace MMExNotifier.DataModel
 {
-    [Table(Name = "CHECKINGACCOUNT_V1")]
-    internal class Transaction
+    [Table(Name = "BILLSDEPOSITS_V1")]
+    internal class BillDeposit
     {
         [PrimaryKey]
-        public int TRANSID { get; set; }
+        public int BDID { get; set; }
         [Column]
         public int ACCOUNTID { get; set; }
         [Column]
-        public int? TOACCOUNTID { get; set; }
+        public int TOACCOUNTID { get; set; }
         [Column]
         public int PAYEEID { get; set; }
         [Column]
-        public string? TRANSCODE { get; set; }/* Withdrawal, Deposit, Transfer */
+        public string? TRANSCODE { get; set; } /* Withdrawal, Deposit, Transfer */
         [Column]
         public double TRANSAMOUNT { get; set; }
         [Column]
@@ -29,10 +29,16 @@ namespace MMExNotifier.Entities
         [Column]
         public int SUBCATEGID { get; set; }
         [Column]
-        public DateTime TRANSDATE { get; set; }
+        public string? TRANSDATE { get; set; }
         [Column]
         public int FOLLOWUPID { get; set; }
         [Column]
-        public double TOTRANSAMOUNT { get; set; }
+        public int TOTRANSAMOUNT { get; set; }
+        [Column]
+        public int REPEATS { get; set; }
+        [Column]
+        public DateTime? NEXTOCCURRENCEDATE { get; set; }
+        [Column]
+        public int NUMOCCURRENCES { get; set; }
     }
 }
