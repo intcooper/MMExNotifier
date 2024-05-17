@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace MMExNotifier.Database
 {
-    internal class DatabaseService : IDatabase
+    internal class DatabaseService : IDatabaseService
     {
-        IAppConfiguration _appConfiguration;
+        private readonly IAppConfiguration _appConfiguration;
 
         public DatabaseService(IAppConfiguration appConfiguration)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MMExNotifier.Database
 {
-    internal interface IDatabase
+    internal interface IDatabaseService
     {
         List<ExpiringBill>? ExpiringBills { get; }
     }

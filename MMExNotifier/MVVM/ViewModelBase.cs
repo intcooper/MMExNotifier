@@ -10,7 +10,7 @@ using Windows.ApplicationModel.Resources.Core;
 
 namespace MMExNotifier.MVVM
 {
-    internal class ViewModelBase : INotifyPropertyChanged
+    internal abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event EventHandler? OnClose;
         public event EventHandler? OnOpen;
@@ -30,5 +30,7 @@ namespace MMExNotifier.MVVM
         {
             OnOpen?.Invoke(this, EventArgs.Empty);
         }
+
+        public abstract void Activate();
     }
 }

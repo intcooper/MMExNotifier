@@ -18,22 +18,25 @@ namespace MMExNotifier.ViewModels
     internal class MainViewModel : ViewModelBase
     {
         private readonly INotificationService _notificationService;
-        private readonly IDatabase _database; 
+        private readonly IDatabaseService _database; 
 
         public RangeObservableCollection<ExpiringBill> ExpiringBills { get; set; } = new RangeObservableCollection<ExpiringBill>();
         public IAppConfiguration AppSettings { get; private set; }
         public RelayCommand SaveSettingsCommand { get; private set; }
 
-        public MainViewModel(IAppConfiguration appSettings, INotificationService notificationService, IDatabase database)
+        public MainViewModel(IAppConfiguration appSettings, INotificationService notificationService, IDatabaseService databaseService)
         {
             _notificationService = notificationService;
-            _database = database;
+            _database = databaseService;
 
             AppSettings = appSettings;
             OnPropertyChanged(nameof(AppSettings));
 
             SaveSettingsCommand = new(() => SaveSettings());
+        }
 
+        public override void Activate()
+        {
             if (string.IsNullOrEmpty(AppSettings.MMExDatabasePath))
                 return;
 
@@ -54,7 +57,10 @@ namespace MMExNotifier.ViewModels
             {
                 ExpiringBills.Clear();
                 var expiringBills = _database.ExpiringBills;
-                ExpiringBills.AddRange(expiringBills);
+                if (expiringBills != null)
+                {
+                    ExpiringBills.AddRange(expiringBills);
+                }
             }
             catch (Exception)
             {
@@ -68,6 +74,7 @@ namespace MMExNotifier.ViewModels
 
             LoadExpiringBills();
         }
+
     }
 }
 
