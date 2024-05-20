@@ -160,6 +160,7 @@
                                 Severity="Informational"
                                 Style="{DynamicResource IconInfoBadgeStyle}" />
 
+                            <!--  Bill expires in two or fewer days  -->
                             <Grid>
                                 <Grid.Style>
                                     <Style TargetType="{x:Type Grid}">
@@ -179,6 +180,7 @@
                                     Style="{DynamicResource IconInfoBadgeStyle}" />
                             </Grid>
 
+                            <!--  Bill expired  -->
                             <Grid>
                                 <Grid.Style>
                                     <Style TargetType="{x:Type Grid}">

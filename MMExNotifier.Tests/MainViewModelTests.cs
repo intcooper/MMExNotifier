@@ -120,5 +120,33 @@ namespace MMExNotifier.Tests
 
             mockNotificationService.Verify();
         }
+
+
+        [Test]
+        public void SavingAppSettings_ShouldReloadExpiringBills()
+        {
+            mockDatabaseService.Setup(x => x.ExpiringBills).Returns(
+                new List<ExpiringBill>
+                {
+                    new()
+                    {
+                        BillId=1,
+                        CategoryName="testCategory",
+                        PayeeName="TestPayee",
+                        NextOccurrenceDate=new DateTime(2024,6,1)
+                    }
+                });
+
+            mockNotificationService.Setup(
+                x => x.ShowErrorNotification(It.IsAny<string>())
+            );
+
+            var mainViewModel = new MainViewModel(mockAppConfiguration.Object, mockNotificationService.Object, mockDatabaseService.Object);
+            mainViewModel.Activate();
+            mainViewModel.SaveSettingsCommand.Execute(null);
+
+            mockNotificationService.Verify();
+            mockDatabaseService.Verify(x => x.ExpiringBills, Times.Exactly(2));
+        }
     }
 }
