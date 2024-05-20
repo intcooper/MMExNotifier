@@ -3,6 +3,7 @@ using System.IO;
 using Drawing = System.Drawing;
 using System.Reflection;
 using WpfUi = Wpf.Ui.Controls;
+using System.ComponentModel;
 
 namespace MMExNotifier
 {
@@ -29,10 +30,8 @@ namespace MMExNotifier
                 settingsPanel.Visibility = Visibility.Visible;
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            Close();
-
             Properties.Settings.Default.WindowPosition = new Drawing.Point((int)Left, (int)Top);
             Properties.Settings.Default.WindowSize = new Drawing.Size((int)Width, (int)Height);
             Properties.Settings.Default.Save();
@@ -69,7 +68,7 @@ namespace MMExNotifier
                 $"Version {appVersion}\n\n" +
                 "This software is provided free of charge and may be used, copied, and distributed without restriction.";
 
-            System.Windows.MessageBox.Show(this, aboutMessage, "About MMExNotifier", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(this, aboutMessage, "About MMExNotifier", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
