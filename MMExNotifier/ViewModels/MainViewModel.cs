@@ -29,7 +29,10 @@ namespace MMExNotifier.ViewModels
         public override void Activate()
         {
             if (string.IsNullOrEmpty(AppSettings.MMExDatabasePath))
+            {
+                Open();
                 return;
+            }
 
             LoadExpiringBills();
 

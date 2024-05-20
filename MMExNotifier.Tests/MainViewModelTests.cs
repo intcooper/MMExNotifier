@@ -27,15 +27,18 @@ namespace MMExNotifier.Tests
         }
 
         [Test]
-        public void WhenDatabasePathIsNotConfigured_ShouldNotAttemptOpenDatabase()
+        public void WhenDatabasePathIsNotConfigured_ShouldRaiseOpen()
         {
             mockAppConfiguration.Setup(x => x.MMExDatabasePath).Returns(string.Empty);
             mockDatabaseService.Setup(x => x.ExpiringBills).Returns(() => null);
 
             var mainViewModel = new MainViewModel(mockAppConfiguration.Object, mockNotificationService.Object, mockDatabaseService.Object);
+            var openInvoked = false;
+            mainViewModel.OnOpen += (s, e) => { openInvoked = true; };
             mainViewModel.Activate();
 
             Assert.That(mockDatabaseService.Invocations, Is.Empty);
+            Assert.That(openInvoked, Is.True);
         }
 
         [Test]
