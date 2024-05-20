@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="linq2db" Version="5.1.1" />
     <PackageReference Include="linq2db.SQLite" Version="5.1.1" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />

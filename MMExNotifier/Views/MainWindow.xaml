@@ -278,10 +278,8 @@
 
                         <CheckBox
                             Margin="20"
-                            Checked="RunOnLogon_Checked"
                             Content="Run MMExNotifier on Windows logon"
-                            IsChecked="{Binding Path=AppSettings.RunAtLogon}"
-                            Unchecked="RunOnLogon_Unchecked" />
+                            IsChecked="{Binding Path=AppSettings.RunAtLogon}" />
 
                         <Grid Margin="20,10">
                             <Grid.ColumnDefinitions>

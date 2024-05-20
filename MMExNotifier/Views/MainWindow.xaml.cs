@@ -1,16 +1,8 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Input;
-using Microsoft.Win32;
-using Microsoft.Win32.TaskScheduler;
-using System.Security.Principal;
+﻿using System.Windows;
 using System.IO;
 using Drawing = System.Drawing;
 using System.Reflection;
 using WpfUi = Wpf.Ui.Controls;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Windows.Forms;
-using Windows.UI.ApplicationSettings;
 
 namespace MMExNotifier
 {
@@ -49,34 +41,6 @@ namespace MMExNotifier
         private void SettingsPanelClose_Click(object sender, RoutedEventArgs e)
         {
             settingsPanel.Visibility = Visibility.Collapsed;
-        }
-
-
-        private void RunOnLogon_Checked(object sender, RoutedEventArgs e)
-        {
-            using TaskService taskService = new();
-            TaskDefinition taskDefinition = taskService.NewTask();
-
-            // Set the task settings
-            taskDefinition.RegistrationInfo.Description = "MMExNotifier";
-            var userId = WindowsIdentity.GetCurrent().Name;
-
-            // Set the trigger to run on logon
-            LogonTrigger logonTrigger = new() { UserId = userId };
-            taskDefinition.Triggers.Add(logonTrigger);
-
-            // Set the action to run the executable that creates the task
-            string executablePath = Environment.ProcessPath ?? "";
-            taskDefinition.Actions.Add(new ExecAction(executablePath));
-
-            // Register the task in the Windows Task Scheduler
-            taskService.RootFolder.RegisterTaskDefinition("MMExNotifier", taskDefinition);
-        }
-
-        private void RunOnLogon_Unchecked(object sender, RoutedEventArgs e)
-        {
-            using TaskService taskService = new();
-            taskService.RootFolder.DeleteTask("MMExNotifier", false);
         }
 
         private void OpenFile_Click(object sender, RoutedEventArgs e)
