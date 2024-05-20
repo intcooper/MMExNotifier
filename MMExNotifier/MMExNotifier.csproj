@@ -6,23 +6,33 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Resources\MMExNotifier.ico</ApplicationIcon>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\options.png" />
+    <None Remove="Resources\MMExNotifier.ico" />
+    <None Remove="Resources\MMExNotifier.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <Content Include="Resources\MMExNotifier.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="linq2db" Version="5.1.1" />
     <PackageReference Include="linq2db.SQLite" Version="5.1.1" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.117" />
     <PackageReference Include="TaskScheduler" Version="2.10.1" />
+    <PackageReference Include="WPF-UI" Version="3.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\options.png" />
+    <Resource Include="Resources\MMExNotifier.ico" />
+    <Resource Include="Resources\MMExNotifier.png" />
   </ItemGroup>
 
   <ItemGroup>

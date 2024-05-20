@@ -42,6 +42,8 @@ namespace MMExNotifier.Database
                                 BillId = b.BDID,
                                 NextOccurrenceDate = b.NEXTOCCURRENCEDATE.Value,
                                 PayeeName = p.PAYEENAME!,
+                                Amount = b.TOTRANSAMOUNT,
+                                IsDeposit = b.TRANSCODE == "Deposit" ? true : false,
                                 CategoryName = c.CATEGNAME!,
                                 SubCategoryName = s.CATEGNAME!,
                                 Notes = b.NOTES!
