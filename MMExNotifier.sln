@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMExNotifier", "MMExNotifier\MMExNotifier.csproj", "{91E2037D-BD50-4051-AA06-C8CC19D00131}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMExNotifier.Tests", "MMExNotifier.Tests\MMExNotifier.Tests.csproj", "{8E1F80AF-5A10-4790-8367-A15EC5A0C2B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMExNotifier.Tests", "MMExNotifier.Tests\MMExNotifier.Tests.csproj", "{8E1F80AF-5A10-4790-8367-A15EC5A0C2B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,7 +20,6 @@ Global
 		{8E1F80AF-5A10-4790-8367-A15EC5A0C2B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E1F80AF-5A10-4790-8367-A15EC5A0C2B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E1F80AF-5A10-4790-8367-A15EC5A0C2B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E1F80AF-5A10-4790-8367-A15EC5A0C2B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
