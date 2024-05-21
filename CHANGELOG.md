@@ -1,3 +1,9 @@
+# v1.1.0
+
+## Features
+
+- UI Revamp: the main window is now styled with the Windows 11 dark style.
+
 # v1.0.0
 
 Initial Release
