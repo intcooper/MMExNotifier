@@ -20,9 +20,17 @@ namespace MMExNotifier
             var view = new MainWindow();
             var viewModel = new MainViewModel(appConfiguration, new NotificationService(new ToastNotification()), new DatabaseService(appConfiguration));
 
+            view.Hide();
             view.DataContext = viewModel;
-            viewModel.OnClose += (s, e) => Application.Current.Dispatcher.Invoke(() => view.Close());
-            viewModel.OnOpen += (s, e) => Application.Current.Dispatcher.Invoke(() => { if (view.Visibility != Visibility.Visible) view.ShowDialog(); });
+            viewModel.OnClose += (s, e) => view.Dispatcher.Invoke(() => view.Close());
+            viewModel.OnOpen += (s, e) => view.Dispatcher.Invoke(() =>
+            {
+                if (view.Visibility != Visibility.Visible)
+                {
+                    view.Visibility = Visibility.Visible;
+                    view.Show();
+                }
+            });
             viewModel.Activate();
         }
     }

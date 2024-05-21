@@ -20,7 +20,6 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Icon="pack://application:,,,/Resources/MMExNotifier.png"
     ResizeMode="CanResizeWithGrip"
-    Visibility="Hidden"
     WindowBackdropType="Mica"
     WindowCornerPreference="Round"
     WindowStartupLocation="Manual"
@@ -278,11 +277,6 @@
                             </Button>
                         </Grid>
 
-                        <CheckBox
-                            Margin="20"
-                            Content="Run MMExNotifier on Windows logon"
-                            IsChecked="{Binding Path=AppSettings.RunAtLogon}" />
-
                         <Grid Margin="20,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -326,6 +320,11 @@
                                 VerticalAlignment="Center"
                                 Content="days ahead" />
                         </Grid>
+
+                        <CheckBox
+                            Margin="20"
+                            Content="Run MMExNotifier on Windows logon"
+                            IsChecked="{Binding Path=AppSettings.RunAtLogon}" />
 
                     </StackPanel>
                 </Border>
