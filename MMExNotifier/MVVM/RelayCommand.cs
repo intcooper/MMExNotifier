@@ -27,7 +27,7 @@ namespace MMExNotifier.MVVM
 
         public bool CanExecute(object? parameter)
         {
-            return _canExecute == null ? true : _canExecute.Invoke();
+            return _canExecute == null || _canExecute.Invoke();
         }
 
         public void Execute(object? parameter)

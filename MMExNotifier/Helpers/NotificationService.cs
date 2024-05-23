@@ -5,7 +5,7 @@ namespace MMExNotifier.Helpers
 {
     internal class NotificationService : INotificationService
     {
-        private IToastNotification _toastNotification;
+        private readonly IToastNotification _toastNotification;
 
         public NotificationService(IToastNotification toastNotification)
         {

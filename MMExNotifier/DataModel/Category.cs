@@ -7,10 +7,13 @@ namespace MMExNotifier.DataModel
     {
         [PrimaryKey]
         public int CATEGID { get; set; }
+
         [Column]
         public string? CATEGNAME { get; set; }
+
         [Column]
         public int ACTIVE { get; set; }
+
         [Column]
         public int PARENTID { get; set; }
     }

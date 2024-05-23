@@ -40,10 +40,10 @@ namespace MMExNotifier.Database
                             select new ExpiringBill
                             {
                                 BillId = b.BDID,
-                                NextOccurrenceDate = b.NEXTOCCURRENCEDATE.Value,
+                                NextOccurrenceDate = b.NEXTOCCURRENCEDATE,
                                 PayeeName = p.PAYEENAME!,
                                 Amount = b.TOTRANSAMOUNT,
-                                IsDeposit = b.TRANSCODE == "Deposit" ? true : false,
+                                IsDeposit = b.TRANSCODE == "Deposit",
                                 CategoryName = c.CATEGNAME!,
                                 SubCategoryName = s.CATEGNAME!,
                                 Notes = b.NOTES!
