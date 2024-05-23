@@ -236,7 +236,7 @@
                 <Style TargetType="Border">
                     <Setter Property="Visibility" Value="Collapsed" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=AppSettings.MMExDatabasePath}" Value="">
+                        <DataTrigger Binding="{Binding Path=AppSettings.MMExDatabasePath, Mode=OneTime}" Value="">
                             <Setter Property="Visibility" Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
