@@ -29,6 +29,7 @@
         <ResourceDictionary>
             <mvvm:IsLessThanConverter x:Key="isLessThanConverter" />
             <mvvm:DaysToTextConverter x:Key="daysToTextConverter" />
+            <mvvm:ExpiringBillToInfoBadgeConverter x:Key="expiringBillToInfoBadgeConverter" />
 
             <Style x:Key="closeButtonStyle" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="Transparent" />
@@ -152,53 +153,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Grid Margin="10">
-                            <ui:InfoBadge
-                                Icon="{ui:SymbolIcon Info24,
-                                                     Filled=True}"
-                                Severity="Informational"
-                                Style="{DynamicResource IconInfoBadgeStyle}" />
-
-                            <!--  Bill expires in two or fewer days  -->
-                            <Grid>
-                                <Grid.Style>
-                                    <Style TargetType="{x:Type Grid}">
-                                        <Setter Property="Visibility" Value="Hidden" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=DaysToNextOccurrence, Converter={StaticResource isLessThanConverter}, ConverterParameter=2}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Grid.Style>
-
-                                <ui:InfoBadge
-                                    Icon="{ui:SymbolIcon Warning24,
-                                                         Filled=True}"
-                                    Severity="Caution"
-                                    Style="{DynamicResource IconInfoBadgeStyle}" />
-                            </Grid>
-
-                            <!--  Bill expired  -->
-                            <Grid>
-                                <Grid.Style>
-                                    <Style TargetType="{x:Type Grid}">
-                                        <Setter Property="Visibility" Value="Hidden" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=IsExpired}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Grid.Style>
-
-                                <ui:InfoBadge
-                                    Icon="{ui:SymbolIcon Warning24,
-                                                         Filled=True}"
-                                    Severity="Critical"
-                                    Style="{DynamicResource IconInfoBadgeStyle}" />
-                            </Grid>
-                        </Grid>
+                        <ContentControl Margin="10" Content="{Binding Converter={StaticResource expiringBillToInfoBadgeConverter}}" />
 
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock FontSize="16">
@@ -230,7 +185,7 @@
         <Border
             x:Name="settingsPanel"
             Grid.Row="1"
-            d:Visibility="Visible"
+            d:Visibility="Hidden"
             Background="#DD666666">
             <Border.Style>
                 <Style TargetType="Border">
