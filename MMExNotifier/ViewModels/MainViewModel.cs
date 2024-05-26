@@ -39,7 +39,7 @@ namespace MMExNotifier.ViewModels
             }
 
             const int ConversationId = 9813;
-            _notificationService.ShowToastNotification("viewTransactions", ConversationId, "MMExNotifier", "One ore more recurring transaction are about to expire.", () => Open());
+            _notificationService.ShowToastNotification("viewTransactions", ConversationId, "MMExNotifier", "One or more recurring transaction are about to expire.", () => Open());
         }
 
         private void LoadExpiringBills()

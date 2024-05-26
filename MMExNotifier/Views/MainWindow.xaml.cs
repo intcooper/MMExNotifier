@@ -7,13 +7,17 @@ using System.Security.Principal;
 using System.IO;
 using Drawing = System.Drawing;
 using System.Reflection;
+using WpfUi = Wpf.Ui.Controls;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Windows.Forms;
+using Windows.UI.ApplicationSettings;
 
 namespace MMExNotifier
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : WpfUi.FluentWindow
     {
         public MainWindow()
         {
@@ -27,21 +31,10 @@ namespace MMExNotifier
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            settingsPanel.Visibility = Visibility.Visible;
-        }
-
-        private void About_Click(object sender, RoutedEventArgs e)
-        {
-            var appVersion = Assembly
-                            .GetEntryAssembly()
-                            ?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                            ?.InformationalVersion ?? "unknown";
-
-            string aboutMessage = "MMExNotifier\n" +
-                $"Version {appVersion}\n\n" +
-                "This software is provided free of charge and may be used, copied, and distributed without restriction.";
-
-            MessageBox.Show(this, aboutMessage, "About MMExNotifier", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (settingsPanel.Visibility == Visibility.Visible)
+                settingsPanel.Visibility = Visibility.Collapsed;
+            else
+                settingsPanel.Visibility = Visibility.Visible;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -58,15 +51,6 @@ namespace MMExNotifier
             settingsPanel.Visibility = Visibility.Collapsed;
         }
 
-
-
-        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
 
         private void RunOnLogon_Checked(object sender, RoutedEventArgs e)
         {
@@ -97,7 +81,7 @@ namespace MMExNotifier
 
         private void OpenFile_Click(object sender, RoutedEventArgs e)
         {
-            var openFileDialog = new OpenFileDialog
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
             {
                 Title = "Select a MoneyManagerEx database file",
                 Filter = "MMEx Database (*.mmb)|*.mmb",
@@ -108,6 +92,20 @@ namespace MMExNotifier
             {
                 DbPathTextbox.Text = openFileDialog.FileName;
             }
+        }
+
+        private void TitleBar_HelpClicked(WpfUi.TitleBar sender, RoutedEventArgs args)
+        {
+            var appVersion = Assembly
+                .GetEntryAssembly()
+                ?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion ?? "unknown";
+
+            string aboutMessage = "MMExNotifier\n" +
+                $"Version {appVersion}\n\n" +
+                "This software is provided free of charge and may be used, copied, and distributed without restriction.";
+
+            System.Windows.MessageBox.Show(this, aboutMessage, "About MMExNotifier", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
