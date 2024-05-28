@@ -1,10 +1,6 @@
 ﻿using MMExNotifier.DataModel;
 using MMExNotifier.MVVM;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MMExNotifier.ViewModels.Design
 {

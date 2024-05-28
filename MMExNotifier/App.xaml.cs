@@ -1,4 +1,5 @@
-﻿using MMExNotifier.Database;
+﻿using Autofac;
+using MMExNotifier.Database;
 using MMExNotifier.DataModel;
 using MMExNotifier.Helpers;
 using MMExNotifier.ViewModels;
@@ -11,14 +12,23 @@ namespace MMExNotifier
     /// </summary>
     public partial class App : Application
     {
+        private Autofac.IContainer Container { get; set; }
+
+        public App()
+        {
+            SetupContainer();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
+            SetupContainer();
+
             var appConfiguration = new AppConfiguration();
 
             var view = new MainWindow();
-            var viewModel = new MainViewModel(appConfiguration, new NotificationService(new ToastNotification()), new DatabaseService(appConfiguration));
+            var viewModel = Container.Resolve<MainViewModel>();
 
             view.Hide();
             view.DataContext = viewModel;
@@ -32,6 +42,17 @@ namespace MMExNotifier
                 }
             });
             viewModel.Activate();
+        }
+
+        private void SetupContainer()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterType<AppConfiguration>().As<IAppConfiguration>();
+            builder.RegisterType<DatabaseService>().As<IDatabaseService>();
+            builder.RegisterType<ToastNotification>().As<IToastNotification>();
+            builder.RegisterType<NotificationService>().As<INotificationService>();
+            builder.RegisterType<MainViewModel>().As<MainViewModel>();
+            Container = builder.Build();
         }
     }
 }
